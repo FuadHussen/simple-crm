@@ -5,3 +5,44 @@
 .menu-icon {
   cursor: pointer;
 }
+
+.sidenav {
+  width: 300px;
+}
+
+.logo-container {
+  border-bottom: 1px solid #e0e0e0;
+  padding: 16px;
+  min-height: 56px;
+  display: flex;
+  align-items: center;
+}
+
+mat-toolbar-row, mat-toolbar {
+  min-height: 56px;
+  height: 56px;
+}
+
+.menu-items {
+  list-style: none;
+  padding: 0;
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding-left: 16px;
+    padding-right: 16px;
+    height: 48px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #f0f0f0;
+    }
+  }
+}
+
+.router-container {
+  padding-left: 56px;
+  padding-top: 16px;
+}
