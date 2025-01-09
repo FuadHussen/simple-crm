@@ -7,7 +7,10 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogTitle } from '@angular/material/dialog';
 import { MatDialogContent } from '@angular/material/dialog';
 import { MatDialogActions } from '@angular/material/dialog';
-import { MatCalendarCellClassFunction } from '@angular/material/datepicker';
+import { User } from '../../models/user.class';
+import { FormsModule } from '@angular/forms';
+import { Firestore } from '@angular/fire/firestore';
+import { collection, addDoc } from 'firebase/firestore';
 
 @Component({
   selector: 'app-dialog-add-user',
@@ -20,16 +23,36 @@ import { MatCalendarCellClassFunction } from '@angular/material/datepicker';
     MatInputModule,
     MatFormFieldModule,
     MatDatepickerModule,
+    FormsModule,
   ],
   templateUrl: './dialog-add-user.component.html',
   styleUrl: './dialog-add-user.component.scss',
 })
 export class DialogAddUserComponent {
+
+  user = new User();
+  birthDate!: Date;
+
   constructor(
-    public dialogRef: MatDialogRef<DialogAddUserComponent>
+    public dialogRef: MatDialogRef<DialogAddUserComponent>,
+    private firestore: Firestore
   ) {}
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  saveUser() {
+    this.user.birthDate = this.birthDate.getTime();
+    console.log(this.user.birthDate);
+
+    const usersCollection = collection(this.firestore, 'users');
+
+    const userData = this.user.toJson();
+
+    addDoc(usersCollection, userData)
+    .then((result: any) => {
+        console.log('User added successfully', result);
+    });
   }
 }

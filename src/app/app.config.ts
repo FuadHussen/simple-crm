@@ -3,10 +3,14 @@ import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { getDatabase, provideDatabase } from '@angular/fire/database';
+import { getStorage, provideStorage } from '@angular/fire/storage';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
-    provideAnimations()
+    provideAnimations(), provideFirebaseApp(() => initializeApp({"projectId":"simple-crm-ea2b5","appId":"1:1055067644096:web:36c72694db85e4c02b8d25","storageBucket":"simple-crm-ea2b5.firebasestorage.app","apiKey":"AIzaSyAPacAKUpJ5fT9kRzkUtFV0ESDQMCqBsTA","authDomain":"simple-crm-ea2b5.firebaseapp.com","messagingSenderId":"1055067644096"})), provideFirestore(() => getFirestore()), provideDatabase(() => getDatabase()), provideStorage(() => getStorage())
   ]
 };
