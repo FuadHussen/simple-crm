@@ -60,6 +60,8 @@ export class DialogAddUserComponent {
       .then((result: any) => {
         console.log('User added successfully', result);
         this.isLoading = false;
+        this.dialogRef.close();
       });
   }
 }
+
