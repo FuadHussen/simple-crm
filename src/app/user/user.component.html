@@ -3,20 +3,18 @@
     <table class="user-table">
       <tr>
         <th>Name</th>
-        <th>Email</th>
+        <th>Street</th>
+        <th>Postal Code</th>
         <th>City</th>
+        <th>Birth Date</th>
       </tr>
 
-      <tr>
-        <td>John Doe</td>
-        <td>john&#64;doe.com</td>
-        <td>New York</td>
-      </tr>
-
-      <tr>
-        <td>John Doe</td>
-        <td>john&#64;doe.com</td>
-        <td>New York</td>
+      <tr *ngFor="let user of allUsers">
+        <td>{{user.firstName}} {{user.lastName}}</td>
+        <td>{{user.street}}</td>
+        <td>{{user.postalCode}}</td>
+        <td>{{user.city}}</td>
+        <td>{{user.birthDate | date: 'dd.MM.yyyy'}}</td>
       </tr>
     </table>
   </mat-card-content>

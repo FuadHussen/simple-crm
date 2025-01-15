@@ -51,6 +51,9 @@ mat-card-content {
     color: rgba(0, 0, 0, 0.54);
     font-size: 16px;
     text-align: start;
-    padding-left: 16px;
+
+    &:first-child {
+      padding-left: 16px;
+    }
   }
 }
