@@ -9,6 +9,7 @@ import { User } from '../../models/user.class';
 import { MatCardModule } from '@angular/material/card';
 import { Firestore, collection, collectionData } from '@angular/fire/firestore';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-user',
@@ -20,7 +21,8 @@ import { CommonModule } from '@angular/common';
     MatTooltipModule, 
     MatDialogModule,
     MatNativeDateModule,
-    MatCardModule
+    MatCardModule,
+    RouterModule
   ],
   templateUrl: './user.component.html',
   styleUrl: './user.component.scss'
@@ -36,7 +38,7 @@ export class UserComponent implements OnInit {
 
   ngOnInit(): void {
     const usersRef = collection(this.firestore, 'users');
-    collectionData(usersRef)
+    collectionData(usersRef, {idField: 'id'})
     .subscribe((changes: any[]) => {
       console.log('Recived changes from DB', changes);
       this.allUsers = changes;

@@ -42,10 +42,6 @@ export class DialogAddUserComponent {
     private firestore: Firestore
   ) { }
 
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
   saveUser() {
     this.user.birthDate = this.birthDate.getTime();
     console.log(this.user.birthDate);

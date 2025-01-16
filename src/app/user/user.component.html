@@ -3,18 +3,14 @@
     <table class="user-table">
       <tr>
         <th>Name</th>
-        <th>Street</th>
-        <th>Postal Code</th>
+        <th>Email</th>
         <th>City</th>
-        <th>Birth Date</th>
       </tr>
 
-      <tr *ngFor="let user of allUsers">
+      <tr *ngFor="let user of allUsers" [routerLink]="['/user/' + user.id]">
         <td>{{user.firstName}} {{user.lastName}}</td>
-        <td>{{user.street}}</td>
-        <td>{{user.postalCode}}</td>
+        <td>{{user.email}}</td>
         <td>{{user.city}}</td>
-        <td>{{user.birthDate | date: 'dd.MM.yyyy'}}</td>
       </tr>
     </table>
   </mat-card-content>

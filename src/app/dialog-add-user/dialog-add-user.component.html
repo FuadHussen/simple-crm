@@ -17,6 +17,16 @@
       </mat-form-field>
     </div>
 
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>Email</mat-label>
+      <input
+      [disabled]="isLoading"
+      matInput
+      placeholder="Email"
+      [(ngModel)]="user.email"
+    />
+    </mat-form-field>
+
     <div>
       <mat-form-field appearance="outline" class="w-100">
         <mat-label>Birth Date</mat-label>
@@ -72,7 +82,7 @@
 
     <div mat-dialog-actions>
       <button
-        (click)="onNoClick()"
+        (click)="dialogRef.close()"
         [disabled]="isLoading"
         mat-button
         color="primary"
