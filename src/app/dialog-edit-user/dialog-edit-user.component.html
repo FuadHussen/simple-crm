@@ -1,0 +1,71 @@
+<div class="dialog-container">
+    <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+    <div mat-dialog-content>
+  
+    <h1 mat-dialog-title>Add user</h1>
+      <div>
+        <mat-form-field class="mr-16" appearance="outline">
+          <mat-label>First Name</mat-label>
+          <input [disabled]="isLoading" matInput placeholder="First Name" [(ngModel)]="data.user.firstName" />
+          <!-- <mat-hint>Please enter a name</mat-hint> -->
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline">
+          <mat-label>Last Name</mat-label>
+          <input [disabled]="isLoading" matInput placeholder="Last Name" [(ngModel)]="data.user.lastName" />
+          <!-- <mat-hint>Please enter a name</mat-hint> -->
+        </mat-form-field>
+      </div>
+  
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Email</mat-label>
+        <input
+        [disabled]="isLoading"
+        matInput
+        placeholder="Email"
+        [(ngModel)]="data.user.email"
+      />
+      </mat-form-field>
+  
+      <div>
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Birth Date</mat-label>
+          <input
+            [disabled]="isLoading"
+            matInput
+            placeholder="Birth Date"
+            [matDatepicker]="picker"
+            [(ngModel)]="birthDate"
+          />
+          <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+  
+      <div mat-dialog-actions>
+        <button
+          (click)="dialogRef.close()"
+          [disabled]="isLoading"
+          mat-button
+          color="primary"
+        >
+          Cancel
+        </button>
+        <button
+          (click)="saveUser()"
+          [disabled]="isLoading"
+          mat-raised-button
+          color="primary"
+          mat-dialog-close
+          cdkFocusInitial
+        >
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+  
