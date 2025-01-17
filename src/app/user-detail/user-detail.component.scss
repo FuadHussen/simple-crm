@@ -26,6 +26,11 @@
 .user-header-content {
     display: flex;
     gap: 24px;
+
+    
+    p:nth-child(2) {
+        margin-bottom: 0;
+    }
 }
 
 .user-detail-card {

@@ -7,6 +7,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
+import { Firestore } from '@angular/fire/firestore';
+import { doc, updateDoc } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-dialog-edit-address',
@@ -30,7 +32,8 @@ export class DialogEditAddressComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<DialogEditAddressComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { user: User }
+    private firestore: Firestore,
+    @Inject(MAT_DIALOG_DATA) public data: { user: User, userId: string }
   ) { }
 
   ngOnInit() {
@@ -38,6 +41,10 @@ export class DialogEditAddressComponent implements OnInit {
   }
 
   saveUser() {
-
+    this.isLoading = true;
+    const ref = doc(this.firestore, 'users', this.data.userId);
+    updateDoc(ref, this.data.user.toJson());
+    this.dialogRef.close();
+    this.isLoading = false;
   }
 }

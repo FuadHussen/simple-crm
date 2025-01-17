@@ -9,6 +9,9 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { updateDoc } from '@angular/fire/firestore';
+import { doc } from '@angular/fire/firestore';
+import { Firestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-dialog-edit-user',
@@ -31,11 +34,11 @@ export class DialogEditUserComponent implements OnInit {
 
   user = User;
   isLoading = false;
-  birthDate!: Date;
 
   constructor(
     public dialogRef: MatDialogRef<DialogEditUserComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { user: User }
+    private firestore: Firestore,
+    @Inject(MAT_DIALOG_DATA) public data: { user: User, userId: string }
   ) { }
 
   ngOnInit() {
@@ -43,6 +46,10 @@ export class DialogEditUserComponent implements OnInit {
   }
 
   saveUser() {
-
+    this.isLoading = true;
+    const ref = doc(this.firestore, 'users', this.data.userId);
+    updateDoc(ref, this.data.user.toJson());
+    this.dialogRef.close();
+    this.isLoading = false;
   }
 }

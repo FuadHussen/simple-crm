@@ -1,10 +1,31 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { Firestore } from '@angular/fire/firestore';
+import { RouterModule } from '@angular/router';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
 
 describe('AppComponent', () => {
+  const firestoreMock = {
+    collection: () => {},
+    doc: () => {}
+  };
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AppComponent],
+      imports: [
+        AppComponent,
+        RouterModule.forRoot([]),
+        NoopAnimationsModule,
+        MatToolbarModule,
+        MatSidenavModule,
+        MatIconModule
+      ],
+      providers: [
+        { provide: Firestore, useValue: firestoreMock }
+      ]
     }).compileComponents();
   });
 
@@ -18,12 +39,5 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     expect(app.title).toEqual('simple-crm');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, simple-crm');
   });
 });
