@@ -12,7 +12,7 @@
     <div class="user-detail">
       <h2>{{ user.firstName }} {{ user.lastName }}</h2>
       <p>{{ user.email }}</p>
-      <p>{{ user.birthDate | date: 'dd.MM.yyyy' }}</p>
+      <p>{{ getBirthDate() | date: 'dd.MM.yyyy' }}</p>
     </div>
   </mat-card-content>
 </mat-card>

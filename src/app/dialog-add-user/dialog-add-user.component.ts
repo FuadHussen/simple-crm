@@ -10,7 +10,7 @@ import { MatDialogActions } from '@angular/material/dialog';
 import { User } from '../../models/user.class';
 import { FormsModule } from '@angular/forms';
 import { Firestore } from '@angular/fire/firestore';
-import { collection, addDoc } from 'firebase/firestore';
+import { collection, addDoc, Timestamp } from 'firebase/firestore';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { CommonModule } from '@angular/common';
 
@@ -43,13 +43,10 @@ export class DialogAddUserComponent {
   ) { }
 
   saveUser() {
-    this.user.birthDate = this.birthDate.getTime();
-    console.log(this.user.birthDate);
-
+    this.user.birthDate = Timestamp.fromDate(this.birthDate);
+    
     this.isLoading = true;
-
     const usersCollection = collection(this.firestore, 'users');
-
     const userData = this.user.toJson();
 
     addDoc(usersCollection, userData)

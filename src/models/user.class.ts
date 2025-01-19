@@ -1,8 +1,10 @@
+import { Timestamp } from 'firebase/firestore';
+
 export class User {
-    id: string;
+    id?: string;
     firstName: string;
     lastName: string;
-    birthDate: number;
+    birthDate: Timestamp;
     street: string;
     postalCode: number;
     city: string;
@@ -12,7 +14,7 @@ export class User {
         this.id = obj ? obj.id : '';
         this.firstName = obj ? obj.firstName : '';
         this.lastName = obj ? obj.lastName : '';
-        this.birthDate = obj ? obj.birthDate : '';
+        this.birthDate = obj ? obj.birthDate : null;
         this.street = obj ? obj.street : '';
         this.postalCode = obj ? obj.postalCode : '';
         this.city = obj ? obj.city : '';

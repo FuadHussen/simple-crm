@@ -49,7 +49,12 @@ export class UserDetailComponent implements OnInit {
     const docRef = doc(this.firestore, 'users', this.userId);
     getDoc(docRef).then((docSnap) => {
       if (docSnap.exists()) {
-        this.user = new User(docSnap.data());
+        const userData = docSnap.data();
+        // Prüfen ob birthDate ein Timestamp ist und konvertieren
+        if (userData['birthDate'] && typeof userData['birthDate'].toDate === 'function') {
+          userData['birthDate'] = userData['birthDate'].toDate();
+        }
+        this.user = new User(userData);
         this.user.id = docSnap.id;
       }
     });
@@ -57,9 +62,9 @@ export class UserDetailComponent implements OnInit {
 
   editMenu() {
     const dialog = this.dialog.open(DialogEditAddressComponent, {
-      data: { 
+      data: {
         user: new User(this.user.toJson()),
-        userId: this.user.id 
+        userId: this.user.id
       }
     });
 
@@ -70,15 +75,20 @@ export class UserDetailComponent implements OnInit {
 
   editUserDetail() {
     const dialog = this.dialog.open(DialogEditUserComponent, {
-      data: { 
+      data: {
         user: new User(this.user.toJson()),
-        userId: this.user.id 
+        userId: this.user.id
       }
     });
 
     dialog.afterClosed().subscribe(() => {
       this.getUser(); // Daten nach dem Schließen des Dialogs neu laden
     });
+  }
+
+  getBirthDate() {
+    if (!this.user?.birthDate) return null;
+    return this.user.birthDate instanceof Date ? this.user.birthDate : null;
   }
 }
 
